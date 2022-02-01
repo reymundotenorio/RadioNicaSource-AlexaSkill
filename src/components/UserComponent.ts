@@ -23,7 +23,7 @@ export class UserComponent extends BaseComponent {
 
   @Intents(['MyNameIntent'])
   whereAreYouFrom() {
-    this.$user.data.name = this.$entities.name;
+    this.$user.data.name = this.$entities.name?.value;
 
     return this.$send({
       message: `Great, where are you from ${this.$user.data.name}`,
