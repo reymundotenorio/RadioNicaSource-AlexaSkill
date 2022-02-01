@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { AlexaCli } = require('@jovotech/platform-alexa');
 const { ProjectConfig } = require('@jovotech/cli-core');
 
@@ -14,7 +15,7 @@ const project = new ProjectConfig({
   endpoint: '${JOVO_WEBHOOK_URL}',
   plugins: [
     // Add Jovo CLI plugins here
-		new AlexaCli({ locales: { en: [ 'en-US' ] } }),
+    new AlexaCli({ locales: { en: ['en-US'] } }),
   ],
 });
 

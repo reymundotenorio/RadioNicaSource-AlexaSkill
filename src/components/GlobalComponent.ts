@@ -16,4 +16,6 @@ export class GlobalComponent extends BaseComponent {
   LAUNCH() {
     return this.$redirect(LoveHatePizzaComponent);
   }
+
+  // Here we can add the HELP HANDLER, END HANDLER
 }

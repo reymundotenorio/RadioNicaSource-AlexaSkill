@@ -1,5 +1,4 @@
 import { AlexaPlatform } from '@jovotech/platform-alexa';
-import { AlexaPlatform } from '@jovotech/platform-alexa';
 import { App } from '@jovotech/framework';
 
 import { GlobalComponent } from './components/GlobalComponent';
@@ -37,12 +36,9 @@ const app = new App({
   */
   plugins: [
     // Add Jovo plugins here
-		new AlexaPlatform({
-		  intentMap: { 'AMAZON.StopIntent': 'END', 'AMAZON.CancelIntent': 'END' }
-		}),
-		new AlexaPlatform({
-		  intentMap: { 'AMAZON.StopIntent': 'END', 'AMAZON.CancelIntent': 'END' }
-		}),
+    new AlexaPlatform({
+      intentMap: { 'AMAZON.StopIntent': 'END', 'AMAZON.CancelIntent': 'END' },
+    }),
   ],
 
   /*

@@ -3,17 +3,10 @@
   "version": "4.0",
   "intents": {
     "YesIntent": {
-      "phrases": [
-        "yes",
-        "yes please",
-        "sure"
-      ]
+      "phrases": ["yes", "yes please", "sure"]
     },
     "NoIntent": {
-      "phrases": [
-        "no",
-        "no thanks"
-      ]
+      "phrases": ["no", "no thanks"]
     }
   },
   "alexa": {

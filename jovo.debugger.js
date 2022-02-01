@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { DebuggerConfig } = require('@jovotech/plugin-debugger');
 
 const debuggerConfig = new DebuggerConfig({
