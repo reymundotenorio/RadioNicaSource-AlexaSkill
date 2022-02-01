@@ -19,7 +19,17 @@
       "entities": {
         "name": {
           "type": {
-            "alexa": "AMAZON.US_FIRST_NAME"
+            "alexa": "AMAZON.FirstName"
+          }
+        }
+      }
+    },
+    "MyCountryIntent": {
+      "phrases": ["{country}", "i am from {country}", "from {country}"],
+      "entities": {
+        "country": {
+          "type": {
+            "alexa": "AMAZON.Country"
           }
         }
       }

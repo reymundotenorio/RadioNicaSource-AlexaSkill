@@ -1,5 +1,8 @@
 import { BaseOutput, Output, OutputTemplate } from '@jovotech/framework';
 
+import cardJson from '../apl/card.json';
+import nativePla from './nativePla';
+
 @Output()
 export class MyNameOutput extends BaseOutput {
   /*
@@ -12,10 +15,22 @@ export class MyNameOutput extends BaseOutput {
   |
   */
   build(): OutputTemplate | OutputTemplate[] {
+    const message = 'Welcome to Radio NicaSource skill. We want to know, what is your name?';
+
     return {
-      message: 'Welcome to Radio NicaSource skill. We want to know, what is your name?',
+      message,
       reprompt: 'Please answer with your name',
+
+      // card: {
+      //   title: 'Welcome',
+      //   content: 'Welcome to Radio NicaSource',
+      //   imageUrl:
+      //     'https://d2o906d8ln7ui1.cloudfront.net/images/templates_v3/headline/HeadlineBackground_Dark.png',
+      //   imageAlt: 'Image',
+      // },
+
       listen: true,
+      platforms: nativePla(cardJson, message),
     };
   }
 }
