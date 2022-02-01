@@ -2,6 +2,8 @@ import { Component, BaseComponent, Intents } from '@jovotech/framework';
 
 import { YesNoOutput } from '../output/YesNoOutput';
 
+const song = 'https://s3.amazonaws.com/jovo-songs/song1.mp3';
+
 /*
 |--------------------------------------------------------------------------
 | Component
@@ -12,9 +14,13 @@ import { YesNoOutput } from '../output/YesNoOutput';
 |
 */
 @Component()
-export class LoveHatePizzaComponent extends BaseComponent {
+export class RadioComponent extends BaseComponent {
+  // START handler (the entry point when another component redirects or delegates to it)
   START() {
-    return this.$send(YesNoOutput, { message: 'Do you like pizza?' });
+    return this.$send(YesNoOutput, {
+      message: 'Do you like pizza?',
+      reprompt: 'Please answer with yes or no.',
+    });
   }
 
   @Intents(['YesIntent'])

@@ -1,5 +1,5 @@
 {
-  "invocation": "my test app",
+  "invocation": "radio nicasource",
   "version": "4.0",
   "intents": {
     "YesIntent": {
@@ -7,6 +7,22 @@
     },
     "NoIntent": {
       "phrases": ["no", "no thanks"]
+    },
+    "MyNameIntent": {
+      "phrases": [
+        "{name}",
+        "my name is {name}",
+        "i am {name}",
+        "you can call me {name}",
+        "call me {name}"
+      ],
+      "entities": {
+        "name": {
+          "type": {
+            "alexa": "AMAZON.US_FIRST_NAME"
+          }
+        }
+      }
     }
   },
   "alexa": {
@@ -23,6 +39,15 @@
           },
           {
             "name": "AMAZON.StopIntent",
+            "samples": []
+          },
+
+          {
+            "name": "AMAZON.ResumeIntent",
+            "samples": []
+          },
+          {
+            "name": "AMAZON.PauseIntent",
             "samples": []
           }
         ]

@@ -2,7 +2,8 @@ import { AlexaPlatform } from '@jovotech/platform-alexa';
 import { App } from '@jovotech/framework';
 
 import { GlobalComponent } from './components/GlobalComponent';
-import { LoveHatePizzaComponent } from './components/LoveHatePizzaComponent';
+import { UserComponent } from './components/UserComponent';
+import { RadioComponent } from './components/RadioComponent';
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ const app = new App({
   | Learn more here: www.jovo.tech/docs/components
   |
   */
-  components: [GlobalComponent, LoveHatePizzaComponent],
+  components: [GlobalComponent, UserComponent, RadioComponent],
 
   /*
   |--------------------------------------------------------------------------

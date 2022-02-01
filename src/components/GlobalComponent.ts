@@ -1,5 +1,5 @@
 import { Component, BaseComponent, Global } from '@jovotech/framework';
-import { LoveHatePizzaComponent } from './LoveHatePizzaComponent';
+import { UserComponent } from './UserComponent';
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +14,7 @@ import { LoveHatePizzaComponent } from './LoveHatePizzaComponent';
 @Component()
 export class GlobalComponent extends BaseComponent {
   LAUNCH() {
-    return this.$redirect(LoveHatePizzaComponent);
+    return this.$redirect(UserComponent);
   }
 
   // Here we can add the HELP HANDLER, END HANDLER
