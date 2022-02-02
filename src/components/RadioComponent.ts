@@ -91,11 +91,7 @@ export class RadioComponent extends BaseComponent {
   }
 
   @Handle(AlexaHandles.onAudioPlayer('PlaybackController.PlayCommandIssued'))
-  testing(): Promise<void> {
-    // this.$user.data.audioPlayerOffset = this.$alexa!.audioPlayer?.offsetInMilliseconds;
-    // console.log('Saved audioPlayerOffset:', this.$user.data.audioPlayerOffset + ' ms');
-    // console.log('AudioPlayer.PlaybackStopped');
-
+  resumeAudioForce(): Promise<void> {
     return this.playRadio(
       song,
       'romance',
@@ -108,14 +104,12 @@ export class RadioComponent extends BaseComponent {
 
   @Intents(['AMAZON.PauseIntent'])
   END(): Promise<void> {
-    // return this.$send({ message: 'Goodbye' });
     return this.$send(AudioPlayerStopOutput);
   }
 
   @Handle(AlexaHandles.onAudioPlayer('AudioPlayer.PlaybackStarted'))
   playbackStarted(): void {
     console.log('AudioPlayer.PlaybackStarted');
-    // this.$send is not necessary here and below, an empty response will be returned
   }
 
   @Handle(AlexaHandles.onAudioPlayer('AudioPlayer.PlaybackNearlyFinished'))
@@ -133,8 +127,6 @@ export class RadioComponent extends BaseComponent {
 
   @Handle(AlexaHandles.onAudioPlayer('AudioPlayer.PlaybackStopped'))
   playbackStopped(): void {
-    // this.$user.data.audioPlayerOffset = this.$alexa!.audioPlayer?.offsetInMilliseconds;
-    // console.log('Saved audioPlayerOffset:', this.$user.data.audioPlayerOffset + ' ms');
     console.log('AudioPlayer.PlaybackStopped');
   }
 

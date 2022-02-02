@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Component, BaseComponent, Intents } from '@jovotech/framework';
 
 import { MyNameOutput } from '../output/MyNameOutput';
@@ -18,12 +17,12 @@ import { RadioComponent } from './RadioComponent';
 @Component()
 export class UserComponent extends BaseComponent {
   // START handler (the entry point when another component redirects or delegates to it)
-  START() {
+  START(): Promise<void> {
     return this.$send(MyNameOutput);
   }
 
   @Intents(['MyNameIntent'])
-  whereAreYouFrom() {
+  whereAreYouFrom(): Promise<void> {
     // Save name in DB
     this.$user.data.name = this.$entities.name?.value || 'User';
 
@@ -31,7 +30,7 @@ export class UserComponent extends BaseComponent {
   }
 
   @Intents(['MyCountryIntent'])
-  favoriteGenreMusic() {
+  favoriteGenreMusic(): Promise<void> {
     // Save country in DB
     this.$user.data.country = this.$entities.country?.value || 'United States';
 
@@ -39,14 +38,14 @@ export class UserComponent extends BaseComponent {
   }
 
   @Intents(['MyMusicGenreIntent'])
-  playFavoriteRadio() {
+  playFavoriteRadio(): Promise<void> {
     // Save genre in DB
     this.$user.data.musicGenre = this.$entities.musicGenre?.value || 'Rock';
 
     return this.$redirect(RadioComponent);
   }
 
-  UNHANDLED() {
+  UNHANDLED(): Promise<void> {
     return this.START();
   }
 }
