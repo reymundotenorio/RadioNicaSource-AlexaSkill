@@ -1,8 +1,10 @@
 import { OutputTemplatePlatforms } from '@jovotech/framework';
+import backgroundPla from '../apl/backgroundPla.json';
 
-const nativePla = (
-  plaJson: Record<string, unknown>,
-  initText: string,
+const BackgroundPLAOutput = (
+  title: string,
+  logoUrl: string,
+  backgroundUrl: string,
 ): OutputTemplatePlatforms | undefined => {
   return {
     alexa: {
@@ -12,13 +14,15 @@ const nativePla = (
             {
               type: 'Alexa.Presentation.APL.RenderDocument',
               token: 'token',
-              document: plaJson,
+              document: backgroundPla,
               datasources: {
-                component_data: {
+                PLA_DATA: {
                   type: 'object',
-                  objectId: 'cardId',
+                  objectId: 'backgroundPla',
                   properties: {
-                    initText: initText,
+                    title,
+                    logoUrl,
+                    backgroundUrl,
                   },
                 },
               },
@@ -30,4 +34,4 @@ const nativePla = (
   };
 };
 
-export default nativePla;
+export default BackgroundPLAOutput;

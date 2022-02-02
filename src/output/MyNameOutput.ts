@@ -1,7 +1,6 @@
 import { BaseOutput, Output, OutputTemplate } from '@jovotech/framework';
 
-import cardJson from '../apl/card.json';
-import nativePla from './nativePla';
+import BackgroundPLAOutput from './BackgroundPLAOutput';
 
 @Output()
 export class MyNameOutput extends BaseOutput {
@@ -15,10 +14,8 @@ export class MyNameOutput extends BaseOutput {
   |
   */
   build(): OutputTemplate | OutputTemplate[] {
-    const message = 'Welcome to Radio NicaSource skill. We want to know, what is your name?';
-
     return {
-      message,
+      message: 'Welcome to Radio NicaSource skill. We want to know, what is your name?',
       reprompt: 'Please answer with your name',
 
       // card: {
@@ -30,7 +27,11 @@ export class MyNameOutput extends BaseOutput {
       // },
 
       listen: true,
-      platforms: nativePla(cardJson, message),
+      platforms: BackgroundPLAOutput(
+        'Welcome to Radio NicaSource',
+        'https://upload.wikimedia.org/wikipedia/commons/d/d2/Logo-de-World-Hits-Radio.png',
+        'https://p4.wallpaperbetter.com/wallpaper/122/787/757/background-radio-receiver-wallpaper-preview.jpg',
+      ),
     };
   }
 }
