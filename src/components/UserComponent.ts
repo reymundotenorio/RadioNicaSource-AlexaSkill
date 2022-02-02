@@ -3,6 +3,8 @@ import { Component, BaseComponent, Intents } from '@jovotech/framework';
 
 import { MyNameOutput } from '../output/MyNameOutput';
 import { MyCountryOutput } from '../output/MyCountryOutput';
+import { MyFavoriteGenreOutput } from '../output/MyFavoriteGenreOutput';
+import { RadioComponent } from './RadioComponent';
 
 const song = 'https://s3.amazonaws.com/jovo-songs/song1.mp3';
 
@@ -30,13 +32,21 @@ export class UserComponent extends BaseComponent {
     return this.$send(MyCountryOutput, { name: this.$user.data.name });
   }
 
-  // @Intents(['MyCityIntent'])
-  // favoriteGenreMusic() {
-  //   // Save city in DB
-  //   this.$user.data.city = this.$entities.city?.value || 'United States';
+  @Intents(['MyCountryIntent'])
+  favoriteGenreMusic() {
+    // Save country in DB
+    this.$user.data.country = this.$entities.country?.value || 'United States';
 
-  //   return this.$send({ message: 'Last question', listen: false });
-  // }
+    return this.$send(MyFavoriteGenreOutput);
+  }
+
+  @Intents(['MyMusicGenreIntent'])
+  playFavoriteRadio() {
+    // Save genre in DB
+    this.$user.data.musicGenre = this.$entities.musicGenre?.value || 'Rock';
+
+    return this.$redirect(RadioComponent);
+  }
 
   UNHANDLED() {
     return this.START();

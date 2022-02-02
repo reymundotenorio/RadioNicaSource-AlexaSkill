@@ -33,6 +33,22 @@
           }
         }
       }
+    },
+    "MyMusicGenreIntent": {
+      "phrases": [
+        "{musicGenre}",
+        "my favorite music genre {musicGenre}",
+        "my favorite genre {musicGenre}",
+        "i like {musicGenre} music",
+        "i like {musicGenre} genre"
+      ],
+      "entities": {
+        "musicGenre": {
+          "type": {
+            "alexa": "AMAZON.Genre"
+          }
+        }
+      }
     }
   },
   "alexa": {

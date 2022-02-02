@@ -1,4 +1,4 @@
-import { Component, BaseComponent, Intents } from '@jovotech/framework';
+import { Component, BaseComponent } from '@jovotech/framework';
 
 import { YesNoOutput } from '../output/YesNoOutput';
 
@@ -17,21 +17,21 @@ const song = 'https://s3.amazonaws.com/jovo-songs/song1.mp3';
 export class RadioComponent extends BaseComponent {
   // START handler (the entry point when another component redirects or delegates to it)
   START() {
-    return this.$send(YesNoOutput, {
-      message: 'Do you like pizza?',
-      reprompt: 'Please answer with yes or no.',
+    return this.$send({
+      message: 'Thanks, we have your radio streaming request. ¡Enjoy!',
+      listen: false,
     });
   }
 
-  @Intents(['YesIntent'])
-  lovesPizza() {
-    return this.$send({ message: 'Yes! I love pizza, too.', listen: false });
-  }
+  // @Intents(['YesIntent'])
+  // lovesPizza() {
+  //   return this.$send({ message: 'Yes! I love pizza, too.', listen: false });
+  // }
 
-  @Intents(['NoIntent'])
-  hatesPizza() {
-    return this.$send({ message: `That's OK! Not everyone likes pizza.`, listen: false });
-  }
+  // @Intents(['NoIntent'])
+  // hatesPizza() {
+  //   return this.$send({ message: `That's OK! Not everyone likes pizza.`, listen: false });
+  // }
 
   UNHANDLED() {
     return this.START();
