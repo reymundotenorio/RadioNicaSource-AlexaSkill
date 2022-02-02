@@ -2,6 +2,11 @@ import { BaseOutput, Output, OutputTemplate } from '@jovotech/framework';
 
 import BackgroundPLAOutput from './BackgroundPLAOutput';
 
+const iconImage =
+  'https://upload.wikimedia.org/wikipedia/commons/d/d2/Logo-de-World-Hits-Radio.png';
+export const backgroundImage =
+  'https://p4.wallpaperbetter.com/wallpaper/122/787/757/background-radio-receiver-wallpaper-preview.jpg';
+
 @Output()
 export class MyNameOutput extends BaseOutput {
   /*
@@ -19,11 +24,7 @@ export class MyNameOutput extends BaseOutput {
       reprompt: 'Please answer with your name',
       listen: true,
 
-      platforms: BackgroundPLAOutput(
-        'Radio NicaSource',
-        'https://upload.wikimedia.org/wikipedia/commons/d/d2/Logo-de-World-Hits-Radio.png',
-        'https://p4.wallpaperbetter.com/wallpaper/122/787/757/background-radio-receiver-wallpaper-preview.jpg',
-      ),
+      platforms: BackgroundPLAOutput('Radio NicaSource', iconImage, backgroundImage),
     };
   }
 }

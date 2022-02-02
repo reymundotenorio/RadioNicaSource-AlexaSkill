@@ -35,3 +35,10 @@ export type RadioStations = {
   geo_long: null;
   has_extended_info: boolean;
 };
+
+export type Station = {
+  streamUrl: string;
+  token: string;
+  title: string;
+  artUrl: string;
+};
