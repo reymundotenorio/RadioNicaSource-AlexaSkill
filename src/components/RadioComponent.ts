@@ -1,8 +1,14 @@
-import { Component, BaseComponent } from '@jovotech/framework';
+import { Component, BaseComponent, Intents, Handle, DeepPartial } from '@jovotech/framework';
 
-import { YesNoOutput } from '../output/YesNoOutput';
+import {
+  AlexaHandles,
+  AudioPlayerPlayOutput,
+  AudioPlayerPlayOutputOptions,
+  AudioPlayerStopOutput,
+} from '@jovotech/platform-alexa';
+import { MyNameOutput } from '../output/MyNameOutput';
 
-const song = 'https://s3.amazonaws.com/jovo-songs/song1.mp3';
+const song = 'https://stereoromance.radioca.st/streams/128kbps.m3u';
 
 /*
 |--------------------------------------------------------------------------
@@ -15,25 +21,129 @@ const song = 'https://s3.amazonaws.com/jovo-songs/song1.mp3';
 */
 @Component()
 export class RadioComponent extends BaseComponent {
-  // START handler (the entry point when another component redirects or delegates to it)
-  START() {
-    return this.$send({
-      message: 'Thanks, we have your radio streaming request. ¡Enjoy!',
-      listen: false,
-    });
+  playRadio(
+    streamUrl: string,
+    token: string,
+    title: string,
+    subtitle: string,
+    artUrl: string,
+    backgroundImageUrl: string,
+    message = '',
+    isStarting = false,
+  ): Promise<void> {
+    const playerSettings: DeepPartial<AudioPlayerPlayOutputOptions> = {
+      audioItem: {
+        stream: {
+          url: streamUrl,
+          token,
+        },
+        metadata: {
+          title,
+          subtitle,
+          art: {
+            sources: [
+              {
+                url: artUrl,
+              },
+            ],
+          },
+          backgroundImage: {
+            sources: [
+              {
+                url: backgroundImageUrl,
+              },
+            ],
+          },
+        },
+      },
+      playBehavior: 'REPLACE_ALL',
+    };
+
+    if (isStarting) playerSettings.message = message;
+
+    return this.$send(AudioPlayerPlayOutput, playerSettings);
   }
 
-  // @Intents(['YesIntent'])
-  // lovesPizza() {
-  //   return this.$send({ message: 'Yes! I love pizza, too.', listen: false });
-  // }
+  // START handler (the entry point when another component redirects or delegates to it)
+  START(): Promise<void> {
+    return this.playRadio(
+      'https://server.multimediamb.com:7000/stream/1/',
+      'latuani',
+      'La Tuani',
+      'from Radio NicaSource',
+      'https://cdn.webrad.io/images/logos/radios-co-ni/tuani.png',
+      'https://p4.wallpaperbetter.com/wallpaper/122/787/757/background-radio-receiver-wallpaper-preview.jpg',
+      'Thanks, we have your radio streaming request. ¡Enjoy!',
+      true,
+    );
+  }
 
-  // @Intents(['NoIntent'])
-  // hatesPizza() {
-  //   return this.$send({ message: `That's OK! Not everyone likes pizza.`, listen: false });
-  // }
+  @Intents(['AMAZON.ResumeIntent'])
+  resumeAudio(): Promise<void> {
+    return this.playRadio(
+      'https://server.multimediamb.com:7000/stream/1/',
+      'latuani',
+      'La Tuani',
+      'from Radio NicaSource',
+      'https://cdn.webrad.io/images/logos/radios-co-ni/tuani.png',
+      'https://p4.wallpaperbetter.com/wallpaper/122/787/757/background-radio-receiver-wallpaper-preview.jpg',
+    );
+  }
 
-  UNHANDLED() {
+  @Handle(AlexaHandles.onAudioPlayer('PlaybackController.PlayCommandIssued'))
+  testing(): Promise<void> {
+    // this.$user.data.audioPlayerOffset = this.$alexa!.audioPlayer?.offsetInMilliseconds;
+    // console.log('Saved audioPlayerOffset:', this.$user.data.audioPlayerOffset + ' ms');
+    // console.log('AudioPlayer.PlaybackStopped');
+
+    return this.playRadio(
+      song,
+      'romance',
+      'Radio Romance',
+      'from Radio NicaSource',
+      'https://cdn.webrad.io/images/logos/radios-co-ni/stereo-romance.png',
+      'https://p4.wallpaperbetter.com/wallpaper/122/787/757/background-radio-receiver-wallpaper-preview.jpg',
+    );
+  }
+
+  @Intents(['AMAZON.PauseIntent'])
+  END(): Promise<void> {
+    // return this.$send({ message: 'Goodbye' });
+    return this.$send(AudioPlayerStopOutput);
+  }
+
+  @Handle(AlexaHandles.onAudioPlayer('AudioPlayer.PlaybackStarted'))
+  playbackStarted(): void {
+    console.log('AudioPlayer.PlaybackStarted');
+    // this.$send is not necessary here and below, an empty response will be returned
+  }
+
+  @Handle(AlexaHandles.onAudioPlayer('AudioPlayer.PlaybackNearlyFinished'))
+  playbackNearlyFinished(): void {
+    console.log('AudioPlayer.PlaybackNearlyFinished');
+  }
+
+  @Handle(AlexaHandles.onAudioPlayer('AudioPlayer.PlaybackFailed'))
+  playbackFailed(): void {
+    if (this.$alexa) {
+      const error = this.$alexa.audioPlayer.error;
+      console.log('AudioPlayer.PlaybackFailed', error?.type, error?.message);
+    }
+  }
+
+  @Handle(AlexaHandles.onAudioPlayer('AudioPlayer.PlaybackStopped'))
+  playbackStopped(): void {
+    // this.$user.data.audioPlayerOffset = this.$alexa!.audioPlayer?.offsetInMilliseconds;
+    // console.log('Saved audioPlayerOffset:', this.$user.data.audioPlayerOffset + ' ms');
+    console.log('AudioPlayer.PlaybackStopped');
+  }
+
+  @Handle(AlexaHandles.onAudioPlayer('AudioPlayer.PlaybackFinished'))
+  playbackFinished(): void {
+    console.log('AudioPlayer.PlaybackFinished');
+  }
+
+  UNHANDLED(): Promise<void> {
     return this.START();
   }
 }

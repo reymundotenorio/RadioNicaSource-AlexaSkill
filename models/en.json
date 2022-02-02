@@ -9,13 +9,7 @@
       "phrases": ["no", "no thanks"]
     },
     "MyNameIntent": {
-      "phrases": [
-        "{name}",
-        "my name is {name}",
-        "i am {name}",
-        "you can call me {name}",
-        "call me {name}"
-      ],
+      "phrases": ["my name is {name}", "i am {name}", "you can call me {name}", "call me {name}"],
       "entities": {
         "name": {
           "type": {
@@ -25,7 +19,7 @@
       }
     },
     "MyCountryIntent": {
-      "phrases": ["{country}", "i am from {country}", "from {country}"],
+      "phrases": ["i am from {country}", "from {country}"],
       "entities": {
         "country": {
           "type": {
@@ -74,6 +68,10 @@
           },
           {
             "name": "AMAZON.PauseIntent",
+            "samples": []
+          },
+          {
+            "name": "AMAZON.StartOverIntent",
             "samples": []
           }
         ]

@@ -6,8 +6,6 @@ import { MyCountryOutput } from '../output/MyCountryOutput';
 import { MyFavoriteGenreOutput } from '../output/MyFavoriteGenreOutput';
 import { RadioComponent } from './RadioComponent';
 
-const song = 'https://s3.amazonaws.com/jovo-songs/song1.mp3';
-
 /*
 |--------------------------------------------------------------------------
 | Component
