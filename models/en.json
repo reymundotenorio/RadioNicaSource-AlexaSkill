@@ -30,7 +30,6 @@
     },
     "MyMusicGenreIntent": {
       "phrases": [
-        "{musicGenre}",
         "my favorite music genre {musicGenre}",
         "my favorite genre {musicGenre}",
         "i like {musicGenre} music",

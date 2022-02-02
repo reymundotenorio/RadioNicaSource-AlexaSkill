@@ -32,7 +32,7 @@ export class UserComponent extends BaseComponent {
   @Intents(['MyCountryIntent'])
   favoriteGenreMusic(): Promise<void> {
     // Save country in DB
-    this.$user.data.country = this.$entities.country?.value || 'United States';
+    this.$user.data.country = this.$entities.country?.value || 'Nicaragua';
 
     return this.$send(MyFavoriteGenreOutput);
   }
@@ -40,7 +40,7 @@ export class UserComponent extends BaseComponent {
   @Intents(['MyMusicGenreIntent'])
   playFavoriteRadio(): Promise<void> {
     // Save genre in DB
-    this.$user.data.musicGenre = this.$entities.musicGenre?.value || 'Rock';
+    this.$user.data.musicGenre = this.$entities.musicGenre?.value || 'hip hop';
 
     return this.$redirect(RadioComponent);
   }
