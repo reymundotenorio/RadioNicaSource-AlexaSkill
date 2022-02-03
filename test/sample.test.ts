@@ -12,15 +12,15 @@ import { TestSuite, InputType } from '@jovotech/framework';
 
 const testSuite = new TestSuite();
 
-test('should ask the user if they like pizza', async () => {
+test('should ask the user for his/her name', async () => {
   const { output } = await testSuite.run({
     type: InputType.Launch, // or 'LAUNCH'
   });
 
   expect(output).toEqual([
     {
-      message: 'Do you like pizza?',
-      quickReplies: ['yes', 'no'],
+      message: 'Welcome to Radio NicaSource skill. We want to know, what is your name?',
+      reprompt: 'Please answer with your name',
       listen: true,
     },
   ]);

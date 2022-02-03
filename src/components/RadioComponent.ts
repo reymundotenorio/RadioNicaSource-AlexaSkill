@@ -89,6 +89,10 @@ export class RadioComponent extends BaseComponent {
   nextCommandIssued(): void {
     console.log('PlaybackController.NextCommandIssued');
   }
+  @Handle(AlexaHandles.onPlaybackController('PlaybackController.PreviousCommandIssued'))
+  previousCommandIssued(): void {
+    console.log('PlaybackController.PreviousCommandIssued');
+  }
 
   @Handle(AlexaHandles.onAudioPlayer('AudioPlayer.PlaybackStopped'))
   playbackStopped(): void {
