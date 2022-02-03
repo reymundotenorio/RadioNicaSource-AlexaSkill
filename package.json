@@ -24,9 +24,9 @@
     "@jovotech/platform-alexa": "^4.2.0",
     "@jovotech/plugin-debugger": "^4.0.0",
     "@jovotech/server-express": "^4.0.0",
+    "@jovotech/server-lambda": "4.2.0",
     "radio-browser": "^2.1.9",
-    "source-map-support": "^0.5.19",
-    "@jovotech/server-lambda": "4.2.0"
+    "source-map-support": "^0.5.19"
   },
   "devDependencies": {
     "@jovotech/cli-command-build": "^4.1.0",
