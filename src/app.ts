@@ -1,6 +1,5 @@
 import { AlexaPlatform } from '@jovotech/platform-alexa';
 import { App } from '@jovotech/framework';
-import { DynamoDb } from '@jovotech/db-dynamodb';
 
 import { GlobalComponent } from './components/GlobalComponent';
 import { UserComponent } from './components/UserComponent';
@@ -41,11 +40,6 @@ const app = new App({
     new AlexaPlatform({
       intentMap: { 'AMAZON.StopIntent': 'END', 'AMAZON.CancelIntent': 'END' },
     }),
-    // new DynamoDb({
-    //   table: {
-    //     name: 'RadioNicaSourceDB',
-    //   },
-    // }),
   ],
 
   /*

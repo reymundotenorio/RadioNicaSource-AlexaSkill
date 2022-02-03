@@ -150,7 +150,7 @@ export class RadioComponent extends BaseComponent {
       const radioStation = radios[randomStation - 1];
 
       // Sanitize values
-      radioStation.url_resolved = radioStation.url_resolved;
+      radioStation.url_resolved = radioStation.url_resolved || default_streamUrl;
       radioStation.stationuuid = radioStation.stationuuid || default_token;
       radioStation.name = radioStation.name || default_title;
       radioStation.favicon =
