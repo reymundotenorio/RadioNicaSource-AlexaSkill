@@ -85,6 +85,11 @@ export class RadioComponent extends BaseComponent {
     }
   }
 
+  @Handle(AlexaHandles.onPlaybackController('PlaybackController.NextCommandIssued'))
+  nextCommandIssued(): void {
+    console.log('PlaybackController.NextCommandIssued');
+  }
+
   @Handle(AlexaHandles.onAudioPlayer('AudioPlayer.PlaybackStopped'))
   playbackStopped(): void {
     console.log('AudioPlayer.PlaybackStopped');
@@ -140,22 +145,29 @@ export class RadioComponent extends BaseComponent {
       const randomStation = Math.floor(Math.random() * (radios.length - 1)) + 1;
       const radioStation = radios[randomStation - 1];
 
-      // Save station in DB
+      // Sanitize values
+      radioStation.url_resolved = radioStation.url_resolved;
+      radioStation.stationuuid = radioStation.stationuuid || default_token;
+      radioStation.name = radioStation.name || default_title;
+      radioStation.favicon =
+        (radioStation.favicon.endsWith('.jpg') ? radioStation.favicon : default_artUrl) ||
+        default_artUrl;
 
+      // Save station in DB
       if (withMessage)
         this.$user.data.station = {
-          streamUrl: radioStation.url_resolved || default_streamUrl,
-          token: radioStation.stationuuid || default_token,
-          title: radioStation.name || default_title,
-          artUrl: radioStation.favicon || default_artUrl,
+          streamUrl: radioStation.url_resolved,
+          token: radioStation.stationuuid,
+          title: radioStation.name,
+          artUrl: radioStation.favicon,
         };
 
       return this.playRadioInterface(
-        radioStation.url_resolved || default_streamUrl,
-        radioStation.stationuuid || default_token,
-        radioStation.name || default_title,
+        radioStation.url_resolved,
+        radioStation.stationuuid,
+        radioStation.name,
         'from Radio NicaSource',
-        radioStation.favicon || default_artUrl,
+        radioStation.favicon,
         backgroundImage,
         'Thanks, we have your radio streaming request. ¡Enjoy!',
         withMessage,
