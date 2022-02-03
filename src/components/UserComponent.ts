@@ -1,4 +1,4 @@
-import { Component, BaseComponent, Intents } from '@jovotech/framework';
+import { Component, BaseComponent, Intents, Handle } from '@jovotech/framework';
 
 import { MyNameOutput } from '../output/MyNameOutput';
 import { MyCountryOutput } from '../output/MyCountryOutput';
@@ -43,6 +43,15 @@ export class UserComponent extends BaseComponent {
     this.$user.data.musicGenre = this.$entities.musicGenre?.value || 'hip hop';
 
     return this.$redirect(RadioComponent);
+  }
+
+  @Handle({ intents: ['AMAZON.HelpIntent'] })
+  async HelpIntent(): Promise<void> {
+    const message =
+      "You can stream a radio station giving your name, location and your favorite genre of music, the genres available are hip hop, pop, rock, classic. Let's start again";
+    await this.$send({ message });
+
+    return this.START();
   }
 
   UNHANDLED(): Promise<void> {

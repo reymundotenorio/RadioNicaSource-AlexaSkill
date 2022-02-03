@@ -45,9 +45,6 @@ export class RadioComponent extends BaseComponent {
   // }
 
   // public set station(newStation: Station | null) {
-  //   console.log('Has been set');
-  //   console.log(newStation);
-
   //   this._station = newStation;
   // }
 
@@ -207,8 +204,6 @@ export class RadioComponent extends BaseComponent {
     };
 
     if (withMessage) playerSettings.message = message;
-
-    console.log(playerSettings);
 
     return this.$send(AudioPlayerPlayOutput, playerSettings);
   }

@@ -1,4 +1,5 @@
-import { Component, BaseComponent, Global } from '@jovotech/framework';
+import { Component, BaseComponent, Global, Intents, Handle } from '@jovotech/framework';
+
 import { UserComponent } from './UserComponent';
 
 /*
@@ -13,9 +14,15 @@ import { UserComponent } from './UserComponent';
 @Global()
 @Component()
 export class GlobalComponent extends BaseComponent {
-  LAUNCH() {
+  LAUNCH(): Promise<void> {
     return this.$redirect(UserComponent);
   }
 
-  // Here we can add the HELP HANDLER, END HANDLER
+  // @Handle({ intents: ['AMAZON.RepeatIntent'] })
+  // RepeatPreviousIntent(): Promise<void> {
+  //   const prevOutput = this.$history.prev?.output;
+  //   if (!prevOutput) return this.$redirect(UserComponent);
+
+  //   return this.$send(prevOutput);
+  // }
 }

@@ -72,6 +72,10 @@
           {
             "name": "AMAZON.StartOverIntent",
             "samples": []
+          },
+          {
+            "name": "AMAZON.RepeatIntent",
+            "samples": []
           }
         ]
       }
