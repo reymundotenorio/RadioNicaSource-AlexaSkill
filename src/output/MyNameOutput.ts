@@ -19,12 +19,15 @@ export class MyNameOutput extends BaseOutput {
   |
   */
   build(): OutputTemplate | OutputTemplate[] {
-    return {
+    const response: OutputTemplate | OutputTemplate[] = {
       message: 'Welcome to Radio NicaSource skill. We want to know, what is your name?',
       reprompt: 'Please answer with your name',
       listen: true,
-
-      platforms: BackgroundPLAOutput('Radio NicaSource', iconImage, backgroundImage),
     };
+
+    if (this.$device.supports('ALEXA:APL'))
+      response.platforms = BackgroundPLAOutput('Radio NicaSource', iconImage, backgroundImage);
+
+    return response;
   }
 }
