@@ -4,6 +4,7 @@ import { MyNameOutput } from '../output/MyNameOutput';
 import { MyCountryOutput } from '../output/MyCountryOutput';
 import { MyFavoriteGenreOutput } from '../output/MyFavoriteGenreOutput';
 import { RadioComponent } from './RadioComponent';
+import { GlobalComponent } from './GlobalComponent';
 
 /*
 |--------------------------------------------------------------------------
@@ -45,13 +46,19 @@ export class UserComponent extends BaseComponent {
     return this.$redirect(RadioComponent);
   }
 
+  @Handle({ intents: ['AMAZON.RepeatIntent'] })
+  async RepeatIntent(): Promise<void> {
+    return this.$redirect(GlobalComponent, 'RepeatHandler');
+  }
+
   @Handle({ intents: ['AMAZON.HelpIntent'] })
   async HelpIntent(): Promise<void> {
-    const message =
-      "You can stream a radio station giving your name, location and your favorite genre of music, the genres available are hip hop, pop, rock, classic. Let's start again";
-    await this.$send({ message });
+    return this.$redirect(GlobalComponent, 'HelpHandler');
+  }
 
-    return this.START();
+  @Handle({ intents: ['AMAZON.FallbackIntent'] })
+  async FallbackIntent(): Promise<void> {
+    return this.$redirect(GlobalComponent, 'FallbackHandler');
   }
 
   UNHANDLED(): Promise<void> {

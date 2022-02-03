@@ -50,15 +50,15 @@
         "intents": [
           {
             "name": "AMAZON.CancelIntent",
-            "samples": []
+            "samples": ["cancel", "never mind", "forget it"]
           },
           {
             "name": "AMAZON.HelpIntent",
-            "samples": []
+            "samples": ["help", "help me", "can you help me"]
           },
           {
             "name": "AMAZON.StopIntent",
-            "samples": []
+            "samples": ["stop", "off", "shut up"]
           },
 
           {
@@ -71,10 +71,14 @@
           },
           {
             "name": "AMAZON.StartOverIntent",
-            "samples": []
+            "samples": ["start over", "restart", "start again"]
           },
           {
             "name": "AMAZON.RepeatIntent",
+            "samples": ["repeat", "say that again", "repeat that"]
+          },
+          {
+            "name": "AMAZON.FallbackIntent",
             "samples": []
           }
         ]

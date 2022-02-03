@@ -16,6 +16,7 @@
     "eslint": "eslint src test --fix --ext .ts"
   },
   "dependencies": {
+    "@jovotech/db-dynamodb": "^4.2.0",
     "@jovotech/db-filedb": "^4.0.0",
     "@jovotech/framework": "^4.0.0",
     "@jovotech/platform-alexa": "^4.2.0",
