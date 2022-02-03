@@ -42,3 +42,11 @@ export type Station = {
   title: string;
   artUrl: string;
 };
+
+export type RadioApiFilter = {
+  limit: number;
+  country: string;
+  codec: string;
+  is_https: boolean;
+  hidebroken: boolean;
+};
